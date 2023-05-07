@@ -7,13 +7,16 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
+  showAlert = false;
+  alertMessage = 'Please wait! Your account is being created.';
+  alertColor = 'blue'
 
   name = new FormControl('', [Validators.minLength(2), Validators.required])
   email = new FormControl('', [Validators.required, Validators.email])
   age = new FormControl('', [Validators.required, Validators.min(18), Validators.max(120)])
   password = new FormControl('', [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm)])
   confirmPassword = new FormControl('', [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm)])
-  tel = new FormControl('')
+  tel = new FormControl('', [Validators.required, Validators.minLength(14), Validators.maxLength(14) ])
 
   registerForm = new FormGroup({
    name: this.name,
@@ -23,4 +26,10 @@ export class RegisterComponent {
    confirmPassword: this.confirmPassword,
    tel: this.tel
   }) 
+
+  register() {
+    this.showAlert = true;
+    this.alertMessage = 'Please wait! Your account is being created.';
+    this.alertColor = 'blue'
+  }
 }
